@@ -1,0 +1,18 @@
+<?php require 'templates/layout/header.phtml' ?>
+<section class="container justify-content-center" style="width: 20rem;">
+    <form action="loginuser" method="POST">
+        <div class="form-group">
+            <label>Username</label>
+            <input type="text" class="form-control" name="username">
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <input type="text" class="form-control" name="password">
+        </div>
+        <button type="submit" name="submit" value="loginuser" class="btn btn-primary">Submit</button>
+    </form>
+    <div class="d-flex flex-column align-items-center">
+        <p>Do not you have an account yet?</p>
+        <a href="registerform" class="btn-primary">Register</a>
+    </div>
+</section>

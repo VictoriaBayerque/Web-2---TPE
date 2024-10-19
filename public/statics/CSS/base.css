@@ -1,0 +1,56 @@
+/*----------------------------------BASE----------------------------------*/
+
+.mynav{
+    display: block;
+    background-color: rgb(165, 56, 107);
+    margin-bottom: 5rem;
+}
+.dark-section {
+    background-color: rgb(0, 0, 0);
+    color: white;
+}
+.light-section {
+    background-color: rgb(255, 255, 255);
+    color: black;
+}
+span{
+    font-weight: 600;
+    color: rgb(165, 56, 107);
+}
+a:link, a:visited, a:active {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+}
+/*----------------------------------BOOKS----------------------------------*/
+.bookimg{
+    height: 12rem;
+}
+
+
+
+
+
+
+
+
+
+
+/*-------------------------------------- HOME --------------------------------------*/
+
+/*----------- WELCOMING -----------*/
+
+
+.sectiontitles {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.sectiontitles h2 {
+    font-weight: 700;
+    border-bottom: solid 0.2rem rgb(165, 56, 107);
+    
+}
+.sectiontitles img:hover, .sectiontitles h2:hover {
+    transform: scale(1.1,1.1);
+    transition: 0.3s;
+}

@@ -1,0 +1,35 @@
+<?php require 'templates/layout/header.phtml'; ?>
+<div class="container">
+    <form action="<?php echo BASE_URL; ?>saveBook/<?php echo $book->book_id; ?>" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+            <label>Book's name</label>
+            <input type="text" class="form-control" name="bookname" value="<?php echo $book->book_name; ?>">
+        </div>
+        <div class="form-group">
+                    <label>Book's image</label>
+                    <input type="file" name="bookimg" id="">
+                </div>
+        <div class="form-group">
+            <label>Book's author</label>
+            <select class="form-control form-control-lg" name="authorname"  value="<?php echo $book->book_authorname; ?>">
+                <?php foreach($authors as $author): ?>
+                    <option value="<?php echo $author->author_name ?>"><?php echo $author->author_name; ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Series</label>
+            <input type="text" class="form-control" name="seriesname" value="<?php echo $book->book_series; ?>">
+        </div>
+        <div class="form-group">
+            <label>Number of the book in the series</label>
+            <input type="number" class="form-control" name="seriesnumber"  value="<?php echo $book->book_seriesnumber; ?>">
+        </div>
+        <div class="form-group">
+            <label>Book's summary</label>
+            <input type="textarea" class="form-control" name="summary" value="<?php echo $book->book_summary; ?>">
+        </div>
+        <button type="submit" name="submit" value="<?php echo BASE_URL; ?>saveBook/<?php echo $book->book_id; ?>" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+<?php require 'templates/layout/footer.php'; ?>

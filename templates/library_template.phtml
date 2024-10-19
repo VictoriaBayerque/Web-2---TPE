@@ -1,0 +1,22 @@
+<?php require 'templates/layout/header.phtml'; ?>
+<div class="container">
+    <div class="row justify-content-center">
+        <?php foreach($library as $book): ?>
+            <div class="card col-4" style="width: 18rem;">
+                <img class="card-img bookimg" src="<?php echo BASE_URL; ?>public/statics/images/books/<?php echo $book->book_img; ?>" alt="Card image">
+                <div class="card-body">
+                    <h5 class="card-title"><?=$book->book_name?></h5>
+                    <h6 class="card-subtitle mb-2 text-muted"><?=$book->book_authorname?> - Series: <?=$book->book_series?></h6>
+                    <p class="card-text"><?=$book->book_summary?></p>
+                    <a href="book/<?php echo $book->book_id ?>" class="card-link">Read more</a>
+                    <a href="modifyForm/<?php echo $book->book_id ?>" class="card-link">Editar</a>
+                    <a href="erase/<?php echo $book->book_id ?>" class="card-link">Borrar</a>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+</div>
+<div class="container">
+    <a href="addBookForm" class="btn btn-primary">Add new book</a>
+</div>
+<?php require './templates/layout/footer.php'; ?>

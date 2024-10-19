@@ -1,0 +1,38 @@
+        <?php require 'templates/layout/header.phtml'; ?>
+        <div class="container">
+            <div>
+                <form action="addBook" method="POST" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label>Book's name</label>
+                        <input type="text" class="form-control" name="bookname" placeholder="Enter the book">
+                    </div>
+                    <div class="form-group">
+                    <div class="form-group">
+                        <label>Book's image</label>
+                        <input type="file" name="bookimg" id="">
+                    </div>
+                        <label>Book's author</label>
+                        <select class="form-control form-control-lg" name="authorname">
+                            <?php foreach($authors as $author): ?>
+                                <option value="<?php echo $author->author_name ?>"><?php echo $author->author_name ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Series</label>
+                        <input type="text" class="form-control" name="seriesname" placeholder="Enter the series">
+                    </div>
+                    <div class="form-group">
+                        <label>Number of the book in the series</label>
+                        <input type="number" class="form-control" name="seriesnumber" placeholder="Enter the number of the book">
+                    </div>
+                    <div class="form-group">
+                        <label>Book's summary</label>
+                        <input type="textarea" class="form-control" name="summary" placeholder="Enter the summary">
+                    </div>
+                    <button type="submit" name="submit" value="addBook" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
