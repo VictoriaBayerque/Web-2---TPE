@@ -7,7 +7,7 @@ class BaseController {
     public function __construct() {
         $this->view = new BaseView();
     }
-    public function showHome($loggedUser) {
-        $this->view->displayHome($loggedUser);
+    public function showHome() {
+        $this->view->displayHome();
     }
 }

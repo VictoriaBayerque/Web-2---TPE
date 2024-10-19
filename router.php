@@ -25,8 +25,7 @@ $authorsController = new AuthorsController();
 
 switch ($params[0]) {
     case 'home':
-        sessionVerify($loggedUser);
-        $baseController->showHome($loggedUser);
+        $baseController->showHome();
         break;
     case 'library':
         $libraryController->showLibrary();

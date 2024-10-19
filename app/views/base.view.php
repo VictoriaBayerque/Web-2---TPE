@@ -2,7 +2,7 @@
 
 class BaseView {
 
-    public function displayHome($loggedUser) {
+    public function displayHome() {
         require 'home.phtml';
     }
 }
