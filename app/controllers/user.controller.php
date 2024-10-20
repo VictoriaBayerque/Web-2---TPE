@@ -1,6 +1,7 @@
 <?php
 include_once './app/models/user.model.php';
 include_once './app/views/user.view.php';
+include_once './app/views/auth.view.php';
 
 class UserController {
 
@@ -10,6 +11,7 @@ class UserController {
     public function __construct() {
         $this->model = new UserModel();
         $this->view = new UserView();
+        $this->authView = new AuthView();
     }
 
     public function showRegisterForm() {
@@ -45,13 +47,13 @@ class UserController {
             !isset($_POST['username']) ||
             empty($_POST['username'])
         ) {
-            return $this->view->showError('You must write your username');
+            return $this->authView->authError('You must write your username');
         }
         if (
             !isset($_POST['password']) ||
             empty($_POST['password'])
         ) {
-            return $this->view->showError('You must write your password');
+            return $this->authView->authError('You must write your password');
         }
 
         $user = $this->model->getUser($_POST['username']);
@@ -62,17 +64,27 @@ class UserController {
             password_verify($_POST['password'], $user->user_password)
         ) {
             session_start();
-            $_SESSION['ID_USER'] = $user->user_id;
-            $_SESSION['USERNAME'] = $user->user_username;
+            $_SESSION['userId'] = $user->user_id;
+            $_SESSION['username'] = $user->user_username;
 
             header("Location: " . BASE_URL);
         } else {
-            $this->view->showError('You could not login into your account. Please, try again.');
+            $this->authView->authError('You could not login into your account. Please, try again.');
         }
     }
     public function logoutUser() {
         session_start();
         session_destroy();
         header("Location: " . BASE_URL);
+    }
+
+    function sessionVerify($data) {
+        session_start();
+        if(isset($_SESSION['userId'])) {
+            return "block";
+        } else {
+            return ;
+            die();
+        }
     }
 }

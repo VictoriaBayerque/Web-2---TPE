@@ -1,5 +1,6 @@
 <?php
 include_once './app/views/base.view.php';
+include_once './app/controllers/user.controller.php';
 
 class BaseController {
     private $view;

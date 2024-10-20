@@ -1,4 +1,4 @@
 <?php
-class UserSession {
-    public $user = null;
-}
+    class UserSession {
+        public $user = null;
+    }
