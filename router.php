@@ -25,9 +25,11 @@ $authorsController = new AuthorsController();
 
 
 switch ($params[0]) {
+    //------------------HOME
     case 'home':
         $baseController->showHome();
         break;
+    //------------------BOOKS
     case 'library':
         $libraryController->showLibrary();
         break;
@@ -63,6 +65,38 @@ switch ($params[0]) {
         verifySession($user);
         $libraryController->saveBook($params[1]);
         break;
+    //------------------AUTHORS
+    case 'author':
+        $author = htmlspecialchars($params[1]);
+        if (isset($author)) {
+            $authorsController->showAuthor($author);
+        } else {
+            $authorsController->showAuthors();
+        }
+        break;
+    case 'addAuthorForm':
+        verifySession($user);
+        $authorsController->addAuthorView();
+        break;
+    case 'addAuthor':
+        verifySession($user);
+        $authorsController->addAuthor();
+        break;
+    case 'eraseauthor':
+        verifySession($user);
+        if (isset($params[1])) {
+            $authorsController->deleteAuthor($params[1]);
+        }
+        break;
+    case 'modifyauthor':
+        verifySession($user);
+        $authorsController->modifyAuthorForm($params[1]);
+        break;
+    case 'saveauthor':
+        verifySession($user);
+        $authorsController->saveAuthor($params[1]);
+        break;
+    //------------------USERS
     case 'registerform':
         verifySession($user);
         $userController->showRegisterForm();

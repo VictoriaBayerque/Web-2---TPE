@@ -13,6 +13,10 @@
     background-color: rgb(255, 255, 255);
     color: black;
 }
+.btn-main {
+    background-color: rgb(165, 56, 107);
+    padding: 0.3rem;
+}
 span{
     font-weight: 600;
     color: rgb(165, 56, 107);
@@ -21,18 +25,14 @@ a:link, a:visited, a:active {
     color: rgb(0, 0, 0);
     text-decoration: none;
 }
+footer {
+    background-color: rgb(165, 56, 107);
+    color:white;
+}
 /*----------------------------------BOOKS----------------------------------*/
 .bookimg{
     height: 12rem;
 }
-
-
-
-
-
-
-
-
 
 
 /*-------------------------------------- HOME --------------------------------------*/

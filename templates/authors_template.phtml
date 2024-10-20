@@ -1,15 +1,77 @@
-<div class="container">
-    <div class="row justify-content-center">
-        <?php foreach($authors as $author): ?>
-            <div class="card col-4" style="width: 18rem;">
-                <!-- <img class="card-img bookimg" src="public/statics/images/books/<?php echo $book->book_img; ?>" alt="Card image"> -->
-                <div class="card-body">
-                    <h5 class="card-title"><?=$author->author_name?></h5>
-                    <h6 class="card-subtitle mb-2 text-muted"><?=$author->author_age?> years old</h6>
-                    <p class="card-text">Active since <?=$author->author_activity?></p>
-                    <a href="book/<?=$author->author_name?>" class="card-link">Read more</a>
+<?php require './templates/layout/header.phtml'; ?>
+    <div class="container">
+        <div
+        class="row justify-content-center"
+        style="padding-bottom: 5rem;">
+
+            <?php foreach($authors as $author): ?>
+
+                <div
+                class="card col-4"
+                style="width: 18rem;">
+                    <img
+                    class="card-img bookimg"
+                    src="<?php echo BASE_URL; ?>public/statics/images/authors/<?php echo $author->author_img; ?>"
+                    alt="Card image">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <?php echo htmlspecialchars($author->author_name) ?>
+                        </h5>
+                        <h6 class="card-subtitle mb-2 text-muted">
+                            <?php echo $author->author_age ?> years old
+                        </h6>
+                        <p class="card-text">
+                            Active since <?=$author->author_activity?>
+                        </p>
+                        <div class="d-flex justify-content-between">
+                            <a
+                            href="author/<?php echo htmlspecialchars($author->author_id) ?>"
+                            style="
+                            background-color: rgb(165, 56, 107);
+                            padding: 0.3rem;
+                            padding-left: 0.5rem;
+                            padding-right: 0.5rem;
+                            border-radius: 0.4rem;
+                            color: white;
+                            ">
+                                Read more
+                            </a>
+                            <?php if(isset($_SESSION['username'])): ?>
+                                <div>
+                                    <a
+                                    href="modifyauthor/<?php echo htmlspecialchars($author->author_id) ?>"
+                                    class="card-link">
+                                        Editar
+                                    </a>
+                                    <a
+                                    href="eraseauthor/<?php echo htmlspecialchars($author->author_id) ?>"
+                                    class="card-link">
+                                        Borrar
+                                    </a>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        <?php endforeach; ?>
+            <?php endforeach; ?>
+        </div>
     </div>
-</div>
+<?php if(isset($_SESSION['username']) && $_SESSION['username'] == "ladypanther"): ?>
+    <div
+    class="container d-flex justify-content-center"
+    style="padding-top: 3rem; padding-bottom: 3rem;">
+        <a href="addAuthorForm"
+        style="
+        background-color: rgb(165, 56, 107);
+        padding: 0.3rem;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+        border-radius: 0.4rem;
+        color: white;
+        ">
+            Add new author
+        </a>
+    </div>
+<?php endif; ?>
+
+<?php require './templates/layout/footer.php'; ?>

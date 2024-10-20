@@ -14,27 +14,45 @@ require_once "./app/controllers/authors.controller.php";
         
             return $authors;
         }
-        public function getAuthor($authorname) {
-            $query = $this->db->prepare('SELECT * FROM Authors WHERE author_name = ?');
-            $query->execute([$authorname]);   
+        public function getAuthor($authorid) {
+            $query = $this->db->prepare('SELECT * FROM Authors WHERE author_id = ?');
+            $query->execute([$authorid]);   
             $author = $query->fetch(PDO::FETCH_OBJ);
         
             return $author;
         }
-        public function insertAuthor ($author_name, $author_age, $author_activity){
-            $query =$this->db-> prepare ('INSERT INTO Authors (author_name, author_age, author_activity) VALUES (?, ?, ?)');
-            $query ->execute ([$author_name, $author_age, $author_activity]);
-            $author = $this->db->lastInsertId();
-    
-            return $author;
+        public function insertAuthor ($author_name, $author_age, $author_activity, $author_img = null){
+            $newFileName = null;
+            if ($author_img) {
+                $newFileName = $this->moveImg($author_img);
+            }
+
+            $query =$this->db-> prepare ('INSERT INTO Authors (author_name, author_age, author_activity, author_img) VALUES (?, ?, ?, ?)');
+            $query->execute([$author_name, $author_age, $author_activity, $newFileName]);
+            
+            return $this->db->lastInsertId();
         }
-        public function eraseAuthor($authorname){
-            $query = $this->db->prepare ('DELETE FROM Authors WHERE author_name = ?');
-            $query->execute([$authorname]);
+        private function moveImg($authorimg) {
+            $newFileName = uniqid() . "." . strtolower(pathinfo($authorimg['name'], PATHINFO_EXTENSION));
+            $filepath = "./public/statics/images/authors/" . $newFileName ;
+            move_uploaded_file($authorimg['tmp_name'], $filepath);
+            
+            return $newFileName;
         }
-        function updateAuthor ($authorname){
-            //VERIFICAR EL CODIGO SQL DESPUES DEL SET!!!!!
-            $query = $db->prepare('UPDATE Authors SET author_age = ? WHERE id = ?');
-            $query->execute([$authorname]);
+        public function eraseAuthor($authorid){
+            $query = $this->db->prepare ('DELETE FROM Authors WHERE author_id = ?');
+            $query->execute([$authorid]);
+        }
+        function updateAuthor ($authorid, $author_name, $author_age, $author_activity, $author_img = null){
+            $newFileName = null;
+            if ($author_img) {
+                $newFileName = $this->moveImg($author_img);
+                
+                $query = $this->db->prepare('UPDATE Authors SET author_name = ?, author_age = ?, author_activity = ?, author_img = ? WHERE author_id = ?');
+                $query->execute([$author_name, $author_age, $author_activity, $newFileName, $authorid]);
+            } else {
+                $query = $this->db->prepare('UPDATE Authors SET author_name = ?, author_age = ?, author_activity = ? WHERE author_id = ?');
+                $query->execute([$author_name, $author_age, $author_activity, $authorid]);
+            }
         }
 }

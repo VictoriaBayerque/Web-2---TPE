@@ -5,7 +5,7 @@ class LibraryView {
     public function showError($error) {
         require 'templates/error.phtml';
     }
-    public function displayLibrary($library) {
+    public function displayLibrary($library, $authors) {
         require 'templates/library_template.phtml';
     }
     public function displayAddBook($authors) {

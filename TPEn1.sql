@@ -33,4 +33,4 @@ INSERT INTO `Books` (`book_id`, `book_name`, `book_authorname`, `book_series`, `
 INSERT INTO `Books` (`book_id`, `book_name`, `book_authorname`, `book_series`, `book_seriesnumber`, `book_summary`) VALUES (NULL, 'A court of wings and ruin', 'Sarah J. Mass', 'ACOTAR', 3, 'The war is near and...');
 INSERT INTO `Books` (`book_id`, `book_name`, `book_authorname`, `book_series`, `book_seriesnumber`, `book_summary`) VALUES (NULL, 'From blood and ash', 'Jennifer L. Armentrout', 'From blood and ash', 1, 'Noblesse oblige and the protagonist...');
 
-ALTER TABLE `Books` ADD CONSTRAINT `fk_bookauthor` FOREIGN KEY (`book_authorname`) REFERENCES `authors`(`author_name`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `Books` ADD CONSTRAINT `fk_bookauthor` FOREIGN KEY (`book_authorid`) REFERENCES `authors`(`author_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;

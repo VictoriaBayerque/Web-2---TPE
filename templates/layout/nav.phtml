@@ -15,10 +15,16 @@
         <li class="nav-item">
           <a class="nav-link" href="<?php echo BASE_URL; ?>authors">Authors</a>
         </li>
-        <?php if(isset($_SESSION['username']) && $_SESSION['username'] == "ladypanther"): ?>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Logout</a>
-        </li>
+        <?php session_start(); ?>
+        <?php if(!$_SESSION): ?>
+          <li class="nav-item">
+            <a class="nav-link" href="loginform">Login</a>
+          </li>
+        <?php endif; ?>
+        <?php if($_SESSION): ?>
+          <li class="nav-item">
+            <a class="nav-link" href="logoutuser">Logout</a>
+          </li>
         <?php endif; ?>
       </ul>
     </div>

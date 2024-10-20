@@ -14,39 +14,88 @@
             $authors = $this->model->getAuthors();
             return $this->view->displayAuthors($authors);
         }
-        public function showAuthor($name) {
-            $author = $this->model->getAuthor($name);
+        
+        public function showAuthor($id) {
+            $author = $this->model->getAuthor($id);
             return $this->view->displayAuthor($author);
         }
-
-        public function addAuthor() {
-            if (!isset($_POST['name']) || empty($_POST['name'])) {  
-                return $this->view->showError('You must insert the name');
-            }
-            $name = $_POST['name'];
-            $age = $_POST['age'];
-            $activity = $_POST['activity'];
-
-            $this->model->insertBook($name, $age, $activity);
-
-            header('Location: ' . BASE_URL);
+        public function getAuthor($id) {
+            $author = $this->model->getAuthor($id);
+            return $author;
         }
-        public function deleteBook($name) {
-            $author = $this->model->getAuthor($name);
+        public function addAuthor() {
+            if ($_FILES['authorimg']['name']) {
+                if ($_FILES['authorimg']['type'] == "image/jpeg" ||
+                $_FILES['authorimg']['type'] == "image/jpg" ||
+                $_FILES['authorimg']['type'] == "image/png") {
+                    
+                    $this->model->insertAuthor(
+                        $_POST['authorname'],
+                        $_POST['authorage'],
+                        $_POST['authoractivity'],
+                        $_FILES['authorimg']
+                    );
+                }
+                else {
+                    $this->view->showError("Insert a valid file type");
+                    die();
+                }
+            }
+            else {
+                $this->model->insertAuthor(
+                    $_POST['authorname'],
+                    $_POST['authorage'],
+                    $_POST['authoractivity'],
+                ); 
+            }
+            header("Location: " . BASE_URL . "authors");
+        }
+        public function deleteAuthor($id) {
+            $author = $this->model->getAuthor($id);
             if (!$author){
                 return $this->view->showError('The author does not exist in the database');
             }
-            $this->model->eraseAuthor($name);
+            $this->model->eraseAuthor($id);
 
             header('Location: ' . BASE_URL);
         } 
-        public function saveAuthor($name) { 
-            $author = $this->model->getAuthor($name);
-            if (!$author){
+        public function saveAuthor($id) { 
+            if ($id) {
+                if ($_FILES['authorimg']['name']) {
+                    if ($_FILES['authorimg']['type'] == "image/jpeg" ||
+                    $_FILES['authorimg']['type'] == "image/jpg" ||
+                    $_FILES['authorimg']['type'] == "image/png") {
+                    
+                    $this->model->updateAuthor(
+                        $id,
+                        $_POST['authorname'],
+                        $_POST['authorage'],
+                        $_POST['authoractivity'],
+                        $_FILES['authorimg']
+                    );
+                    } else {
+                        $this->view->showError("Insert a valid file type");
+                        die();
+                    }
+                } else {
+                    $this->model->updateAuthor(
+                        $id,
+                        $_POST['authorname'],
+                        $_POST['authorage'],
+                        $_POST['authoractivity'],
+                    ); 
+                }
+            } else {
                 return $this->view->showError('It is not possible to save the author');
             }
-            $this->model->updateAuthor($name);
-            header('Location: ' . BASE_URL);
-        }    
+            header('Location: ' . BASE_URL . 'authors');
+        }
+        public function addAuthorView() {
+            return $this->view->displayAddAuthor();
+        }
+        public function modifyAuthorForm($id) {
+            $author = $this->model->getAuthor($id);
+            return $this->view->modifyAuthor($author);
+        }
     }
 

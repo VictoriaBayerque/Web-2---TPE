@@ -1,0 +1,12 @@
+<?php require './templates/layout/header.phtml'; ?>
+<div class="container">
+    <div class="card-body justify-content-center">
+        <!-- <img class="card-img" src="<?php echo BASE_URL; ?>public/statics/images/books/<?php echo $author->author_img; ?>" style="width: 30rem; max-height: 10rem;" alt="Card image"> -->
+        <div class="">
+            <h5 class="card-title"><?php echo htmlspecialchars($author->author_name)?></h5>
+            <h6 class="card-subtitle mb-2 text-muted"><?=$author->age?> - Active since: <?=$author->activity?></h6>
+            <p class="card-text">lala</p>
+        </div>
+    </div>
+</div>
+<?php require './templates/layout/footer.php'; ?>

@@ -24,14 +24,14 @@ require_once "./app/controllers/library.controller.php";
             return $book;
         }
 
-        public function insertBook ($book_name, $book_authorname, $book_series, $book_seriesnumber, $book_summary, $book_img = null){
+        public function insertBook ($book_name, $book_authorid, $book_series, $book_seriesnumber, $book_summary, $book_img = null){
             $newFileName = null;
             if ($book_img) {
                 $newFileName = $this->moveImg($book_img);
             }
 
-            $query =$this->db-> prepare ('INSERT INTO Books (book_name, book_authorname, book_series, book_seriesnumber, book_summary, book_img) VALUES (?, ?, ?, ?, ?, ?)');
-            $query ->execute ([$book_name, $book_authorname, $book_series, $book_seriesnumber, $book_summary, $newFileName]);
+            $query =$this->db-> prepare ('INSERT INTO Books (book_name, book_authorid, book_series, book_seriesnumber, book_summary, book_img) VALUES (?, ?, ?, ?, ?, ?)');
+            $query ->execute ([$book_name, $book_authorid, $book_series, $book_seriesnumber, $book_summary, $newFileName]);
             
             return $this->db->lastInsertId();
         }
@@ -49,16 +49,16 @@ require_once "./app/controllers/library.controller.php";
             $query->execute([$id]);
         }
 
-        public function updateBook($book_id, $book_name, $book_authorname, $book_series, $book_seriesnumber, $book_summary, $book_img = null) {
+        public function updateBook($book_id, $book_name, $book_authorid, $book_series, $book_seriesnumber, $book_summary, $book_img = null) {
             $newFileName = null;
             if ($book_img) {
                 $newFileName = $this->moveImg($book_img);
                 
-                $query = $this->db->prepare('UPDATE Books SET book_name = ?, book_authorname = ?, book_series = ?, book_seriesnumber = ?, book_summary = ?, book_img = ? WHERE book_id = ?');
-                $query->execute([$book_name, $book_authorname, $book_series, $book_seriesnumber, $book_summary, $newFileName, $book_id]);
+                $query = $this->db->prepare('UPDATE Books SET book_name = ?, book_authorid = ?, book_series = ?, book_seriesnumber = ?, book_summary = ?, book_img = ? WHERE book_id = ?');
+                $query->execute([$book_name, $book_authorid, $book_series, $book_seriesnumber, $book_summary, $newFileName, $book_id]);
             } else {
-                $query = $this->db->prepare('UPDATE Books SET book_name = ?, book_authorname = ?, book_series = ?, book_seriesnumber = ?, book_summary = ? WHERE book_id = ?');
-                $query->execute([$book_name, $book_authorname, $book_series, $book_seriesnumber, $book_summary, $book_id]);
+                $query = $this->db->prepare('UPDATE Books SET book_name = ?, book_authorid = ?, book_series = ?, book_seriesnumber = ?, book_summary = ? WHERE book_id = ?');
+                $query->execute([$book_name, $book_authorid, $book_series, $book_seriesnumber, $book_summary, $book_id]);
             }
         }
 }

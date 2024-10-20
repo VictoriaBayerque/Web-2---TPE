@@ -1,20 +1,49 @@
 <?php require 'templates/layout/header.phtml'; ?>
 <div class="container">
     <div class="row justify-content-center">
-        <?php session_start(); foreach($library as $book): ?>
+        <?php foreach($library as $book): ?>
             <div class="card col-4" style="width: 18rem;">
-                <img class="card-img bookimg" src="<?php echo BASE_URL; ?>public/statics/images/books/<?php echo $book->book_img; ?>" alt="Card image">
+                <img
+                class="card-img bookimg"
+                src="<?php echo BASE_URL; ?>public/statics/images/books/<?php echo $book->book_img; ?>"
+                alt="Card image">
                 <div class="card-body">
-                    <h5 class="card-title"><?=$book->book_name?></h5>
-                    <h6 class="card-subtitle mb-2 text-muted"><?=$book->book_authorname?> - Series: <?=$book->book_series?></h6>
-                    <p class="card-text"><?=$book->book_summary?></p>
+                    <h5 class="card-title">
+                        <?=$book->book_name?>
+                    </h5>
+                    <h6 class="card-subtitle mb-2 text-muted">
+                        <?php foreach($authors as $author): ?>
+                            <?php if($author->author_id === $book->book_authorid): ?>
+                                <?= $author->author_name; ?>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                         - Series: <?=$book->book_series?>
+                    </h6>
+                    <p class="card-text">
+                        <?=$book->book_summary?>
+                    </p>
                     <div class="d-flex justify-content-between">
-                        <a href="book/<?php echo $book->book_id ?>" class="card-link">Read more</a>
+                        <a
+                        href="book/<?php echo $book->book_id ?>"
+                        style="
+                        background-color: rgb(165, 56, 107);
+                        padding: 0.3rem;
+                        padding-left: 0.5rem;
+                        padding-right: 0.5rem;
+                        border-radius: 0.4rem;
+                        color: white;
+                        ">
+                            Read more
+                        </a>
                         <?php if(isset($_SESSION['username']) && $_SESSION['username'] == "ladypanther"): ?>
-                        <div>
-                            <a href="modifyForm/<?php echo $book->book_id ?>" class="card-link">Editar</a>
-                            <a href="erase/<?php echo $book->book_id ?>" class="card-link">Borrar</a>
-                        </div>
+                            <div>
+                                <a href="modifyForm/<?php echo $book->book_id ?>" class="card-link">
+                                    Editar
+                                </a>
+                                <a href="erase/<?php echo $book->book_id ?>" class="card-link">
+                                    Borrar
+                                </a>
+                            </div>
                         <?php endif; ?>
                     </div>
                 </div>
@@ -22,7 +51,21 @@
         <?php endforeach; ?>
     </div>
 </div>
-<div class="container">
-    <a href="addBookForm" class="btn btn-primary">Add new book</a>
-</div>
+<?php if(isset($_SESSION['username']) && $_SESSION['username'] == "ladypanther"): ?>
+    <div
+    class="container d-flex justify-content-center"
+    style="padding-top: 3rem; padding-bottom: 3rem;">
+        <a href="addBookForm"
+        style="
+        background-color: rgb(165, 56, 107);
+        padding: 0.3rem;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+        border-radius: 0.4rem;
+        color: white;
+        ">
+            Add new book
+        </a>
+    </div>
+<?php endif; ?>
 <?php require './templates/layout/footer.php'; ?>
