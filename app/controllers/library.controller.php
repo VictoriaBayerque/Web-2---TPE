@@ -21,8 +21,9 @@
 
         public function showBook($id) {
             $book = $this->model->getBook($id);
+            $author = $this->authorModel->getAuthor($book->book_authorid);
             if ($book != null) {
-                $this->view->displayBook($book);
+                $this->view->displayBook($book, $author);
             } else {
                 $this->view->showError("The book does not exist in our database");
             }

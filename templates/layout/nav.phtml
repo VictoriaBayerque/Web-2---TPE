@@ -15,7 +15,7 @@
         <li class="nav-item">
           <a class="nav-link" href="<?php echo BASE_URL; ?>authors">Authors</a>
         </li>
-        <?php session_start(); ?>
+        <span style="display: none;"><?php session_start(); ?></span>
         <?php if(!$_SESSION): ?>
           <li class="nav-item">
             <a class="nav-link" href="loginform">Login</a>

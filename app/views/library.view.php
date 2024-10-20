@@ -11,7 +11,7 @@ class LibraryView {
     public function displayAddBook($authors) {
         require 'templates/addbookform.phtml';
     }
-    public function displayBook($book) {
+    public function displayBook($book, $author) {
         require 'templates/bookies_template.phtml';
     }
     public function modify($book, $authors) {
