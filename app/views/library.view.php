@@ -8,13 +8,14 @@ class LibraryView {
     public function displayLibrary($library, $authors) {
         require 'templates/library_template.phtml';
     }
-    public function displayAddBook($authors) {
-        require 'templates/addbookform.phtml';
-    }
     public function displayBook($book, $author) {
-        require 'templates/bookies_template.phtml';
+        require 'templates/book_template.phtml';
+    }
+    public function displayAddBook($authors) {
+        require 'templates/forms/addbookform.phtml';
     }
     public function modify($book, $authors) {
-        require 'templates/modifybookform.phtml';
+        require 'templates/forms/modifybookform.phtml';
     }
+    
 }

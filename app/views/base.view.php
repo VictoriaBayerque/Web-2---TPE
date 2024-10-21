@@ -3,6 +3,6 @@
 class BaseView {
 
     public function displayHome() {
-        require 'home.phtml';
+        require 'templates/home.phtml';
     }
 }

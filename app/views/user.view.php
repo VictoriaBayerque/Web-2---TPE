@@ -5,9 +5,10 @@ class UserView {
     private $user = null;
 
     public function displayRegisterForm() {
-        require 'registerform.phtml';
+        require 'templates/forms/registerform.phtml';
     }
     public function displayLoginForm() {
-        require 'loginform.phtml';
+        require 'templates/forms/loginform.phtml';
     }
+    
 }

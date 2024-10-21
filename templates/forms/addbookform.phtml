@@ -1,0 +1,92 @@
+<?php require 'templates/layout/header.phtml'; ?>
+    <div class="container justify-content-center" style="width: 40%;">
+        <form
+        action="addBook"
+        method="POST"
+        enctype="multipart/form-data">
+
+            <div class="form-group">
+                <label style="font-weight: bold;">Book's name</label>
+                <input
+                type="text"
+                class="form-control"
+                name="bookname"
+                placeholder="Enter the book">
+            </div>
+            <br>
+            <div class="form-group">
+                <label style="font-weight: bold;">Book's image</label>
+                <input
+                type="file"
+                name="bookimg"
+                id="">
+            </div>
+            <br>
+            <div class="form-group">
+                <label style="font-weight: bold;">Select the author</label>
+                <select
+                class="form-control form-control-lg"
+                name="authorname">
+                    <?php foreach($authors as $author): ?>
+                        <option
+                        value="<?php echo $author->author_id ?>">
+                            <?php echo $author->author_name ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <br>
+            <div class="form-group">
+                <label style="font-weight: bold;">Series</label>
+                <input
+                type="text"
+                class="form-control"
+                name="seriesname"
+                placeholder="Enter the series">
+            </div>
+            <br>
+            <div class="form-group">
+                <label style="font-weight: bold;">Number of the book in the series</label>
+                <input
+                type="number"
+                class="form-control"
+                name="seriesnumber"
+                placeholder="Enter the number of the book">
+            </div>
+            <br>
+            <div class="form-group">
+                <label style="font-weight: bold;">Book's summary</label>
+                <input
+                type="textarea"
+                class="form-control"
+                name="summary"
+                placeholder="Enter the summary">
+            </div>
+            <br>
+            <div class="d-flex justify-content-center">
+                <button
+                type="submit"
+                name="submit"
+                value="addBook"
+                style="
+                background-color: rgb(165, 56, 107);
+                margin-bottom: 5rem;
+                margin-right: 2rem;
+                padding: 0.3rem;
+                padding-left: 0.5rem;
+                padding-right: 0.5rem;
+                border: 0px;
+                border-radius: 0.4rem;
+                color: white;
+                ">
+                    Submit
+                </button>
+                <a
+                href="<?php echo BASE_URL; ?>library">
+                    Go back
+                </a>
+            </div>
+        </form>
+
+    </div>
+    <?php require './templates/layout/footer.phtml'; ?>

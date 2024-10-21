@@ -98,9 +98,11 @@ switch ($params[0]) {
         break;
     //------------------USERS
     case 'registerform':
+        verifySession($user); //Queda con permiso para que nadie pueda entrar y registrarse, asi no tengo que comentar esto ni donde lo llamo
         $userController->showRegisterForm();
         break;
     case 'registeruser':
+        verifySession($user);//Queda con permiso para que nadie pueda entrar y registrarse, asi no tengo que comentar esto ni donde lo llamo
         $userController->registerUser();
         break;
     case 'loginform':
