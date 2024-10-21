@@ -36,7 +36,7 @@
                         ">
                             Read more
                         </a>
-                        <?php if(isset($_SESSION['username']) && $_SESSION['username'] == "ladypanther"): ?>
+                        <?php if(isset($_SESSION['username'])): ?>
                             <div>
                                 <a href="modifyForm/<?php echo $book->book_id ?>" class="card-link">
                                     Editar

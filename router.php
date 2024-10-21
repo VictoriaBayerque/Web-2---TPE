@@ -98,11 +98,9 @@ switch ($params[0]) {
         break;
     //------------------USERS
     case 'registerform':
-        verifySession($user);
         $userController->showRegisterForm();
         break;
     case 'registeruser':
-        verifySession($user);
         $userController->registerUser();
         break;
     case 'loginform':
